@@ -5,10 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src='rpspractice.js'></script>
+    <script src='rpspractice.js' defer></script>
+    <link href="rps.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Rock Paper Scissors</h1>
-    <button onclick="game()">Start Game</button>
+    <div class="bg">
+        <div class= "border">
+            <h1>Rock Paper Scissors</h1>
+            <div class="selections">
+                <button class = "selection" data-selection="ROCK">👊</button>
+                <button class = "selection" data-selection="PAPER">✋</button>
+                <button class= "selection" data-selection="SCISSORS">✌️</button>
+            </div>  
+            <div class="choice margin">
+                <h3>Player Chose</h3>
+                <h3>Computer Chose</h3>
+            </div>
+            <div class="choice pic">
+                <h3 class="player"></h3>
+                <h3 class="computer"></h3>
+            </div>
+            <div class="score">
+                <h2 class="playerScore">0</h2>
+                <h2 class="dash">-</h2>
+                <h2 class="computerScore">0</h2>
+            </div>
+            <h3 class="emoji"></h3>
+            <h3 class="victorymessage"></h3>
+            <button class="reset" onclick="resetGame()">Play Again?</button>
+        </div>
+    </div>
 </body>
 </html>

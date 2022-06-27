@@ -1,0 +1,70 @@
+body {
+    background-color: #f7f8fa;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+.selections {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.selections .selection {
+    font-size: 5rem;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.selection:hover {
+    transform: scale(1.2);;
+}
+
+h1 {
+    text-align: center;
+    
+}
+
+.border {
+    border: 1px solid black;
+    padding: 2rem;
+
+
+}
+
+.choice.margin {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.choice {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.choice.pic {
+    padding: 0px;
+
+} 
+
+.player {
+    font-size: 1rem;
+}
+
+.computer {
+    font-size: 1rem;
+}
+
+.score {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.reset {
+    display: none;
+}

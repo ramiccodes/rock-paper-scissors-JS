@@ -16,58 +16,139 @@ function logWins() {
     console.log('Player Wins:', playerWins);
     console.log('Computer Wins:', computerWins);
     console.log('Ties:', ties);
-    if (playerWins < computerWins) {
-        console.log('🤖🤖🤖 Machines have bested Humanity 🤖🤖🤖')
+    if (computerWins >= 5) {
+        emoji.textContent = '🤖🤖🤖';
+        victoryMessage.textContent = 'Machines have bested humanity!';
+        bg.style.backgroundColor = '#f7f8fa';
+        document.body.style.backgroundColor = '#CB0600';
+        reset.style.display = 'block';
+        reset.style.marginLeft = '130px';
     }
-    else if (playerWins > computerWins) {
-        console.log('👨‍💻👩‍💻 Humanity reigns supreme over the machines! 👨‍💻👩‍💻')
+    else if (playerWins >= 5) {
+        emoji.textContent = '👨‍💻👩‍💻';
+        victoryMessage.textContent = 'Humanity reigns supreme over the machines!';
+        bg.style.backgroundColor = '#f7f8fa';
+        document.body.style.backgroundColor = '#6DB966';
+        reset.style.display = 'block';
+        reset.style.marginLeft = '130px';
     }
 }
 
-function logRound(playerSelection, select, winner,round) {
-    console.log('Round:', round);
-    console.log('Player Chose:', playerSelection);
+function logRound(selectionName, select, winner) {
+    console.log('Player Chose:', selectionName);
     console.log('Computer Chose:', select);
     console.log(winner, "Won the Round");
     console.log('-------------------------------');
     }
 
-let select = computerPlay(computerChoice);
 
-
-function playRound(round) {
-    const playerSelection = prompt('Rock, Paper, Scissors?').toUpperCase();
+function playRound(selectionName) {
     let select = computerPlay(computerChoice);
-    let winner = checkWinner(playerSelection, select);
+    if (select === "SCISSORS") {
+        computer.textContent = '✌️';
+    }
+    else if (select === "PAPER") {
+        computer.textContent = '✋';
+    }
+    else if (select === "ROCK") {
+        computer.textContent = '👊';
+    };
+    let winner = checkWinner(selectionName, select);
     winners.push(winner)
-    logRound(playerSelection, select, winner, round)
+    logRound(selectionName, select, winner)
 }
 
-   
-
-    
-function game() {
-    for (let i = 1; i <= 5; i++) {
-    playRound(i);
-    }
+function game(selectionName) {
+    playRound(selectionName);
     checkWinner();
     logWins();
+    tallyWins();
 }
 
-
-
-
-function checkWinner(playerSelection, select) {
-    if (playerSelection === select) {
+function checkWinner(selectionName, select) {
+    if (selectionName === select) {
         return 'No One';
     }
     else if (
-        (playerSelection === 'ROCK' && select == 'SCISSORS') ||
-        (playerSelection === 'PAPER' && select == 'ROCK') ||
-        (playerSelection === 'SCISSORS' && select == 'PAPER')
+        (selectionName === 'ROCK' && select == 'SCISSORS') ||
+        (selectionName === 'PAPER' && select == 'ROCK') ||
+        (selectionName === 'SCISSORS' && select == 'PAPER')
     ) {
         return 'Player';
     } else {
         return 'Computer';
     }    
 }
+
+function tallyWins() {
+    let playerWins = winners.filter((item) => item == 'Player').length;
+    let computerWins = winners.filter((item) => item == 'Computer').length;
+    let ties = winners.filter((item) => item == 'No One').length;
+    playerScore.textContent = `${playerWins}`;
+    computerScore.textContent = `${computerWins}`;
+}
+
+
+function resetGame() {
+    winners = [];
+    playerScore.textContent = `0`;
+    computerScore.textContent = `0`;
+    selectionName = '';
+    select = '';
+    player.textContent = '';
+    computer.textContent = '';
+    emoji.textContent = '';
+    victoryMessage.textContent = '';
+    reset.style.display = 'none';
+    bg.style.backgroundColor = '#f7f8fa';
+    document.body.style.backgroundColor = '#f7f8fa';
+}
+
+// Event Listeners and Selectors 
+const selectionButtons = document.querySelectorAll('[data-selection]');
+
+selectionButtons.forEach(selectionButton => {
+    selectionButton.addEventListener('click', e => {
+        let selectionName = selectionButton.dataset.selection;
+        if (selectionName == "SCISSORS") {
+            player.textContent = '✌️';
+        }
+        else if (selectionName == "PAPER") {
+            player.textContent = '✋';
+        }
+        else if (selectionName == "ROCK") {
+            player.textContent = '👊';
+        }
+        game(selectionName);
+    })
+});
+
+
+const border = document.querySelector('.border');
+const div = document.createElement('div');
+const pic = document.querySelector('.pic');
+const player = document.querySelector('.player');
+const computer = document.querySelector('.computer');
+const playerScore = document.querySelector('.playerScore');
+const computerScore = document.querySelector('.computerScore');
+const victoryMessage = document.querySelector('.victorymessage');
+const bg = document.querySelector('.bg');
+const emoji = document.querySelector('.emoji');
+const reset = document.querySelector('.reset');
+div.style.marginTop = "1rem";
+div.style.display = "flex";
+div.style.justifyContent = 'space-evenly';
+player.textContent = '';
+computer.textContent= '';
+player.style.fontSize = '50px';
+computer.style.fontSize = '50px';
+emoji.style.display = 'flex';
+emoji.style.justifyContent = 'center';
+emoji.style.fontSize = '50px';
+victoryMessage.style.textAlign = 'center';
+
+
+
+
+
+
